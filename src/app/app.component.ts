@@ -52,10 +52,9 @@ export class AppComponent implements OnInit {
   createMarker() {
     this.markers.forEach(marker => {
 
-      new mapboxgl.Marker({element : '../assets/red.svg'}).setLngLat(marker.geometry.coordinates)
+      new mapboxgl.Marker({color: 'red'}).setLngLat(marker.geometry.coordinates)
         .setPopup(new mapboxgl.Popup().setHTML(marker.properties.description))
         .addTo(this.map);
     });
   }
-
 }

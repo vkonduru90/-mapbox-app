@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import {MapboxService} from './mapbox.service';
 
@@ -7,7 +7,7 @@ import {MapboxService} from './mapbox.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'mapbox-app';
   map: mapboxgl.Map;
   style = 'mapbox://styles/manjula1901/ckeqy42x66mf419lqyeojq35f';
@@ -32,45 +32,24 @@ export class AppComponent {
       container: 'map',
       style: this.style,
       center: [this.lng, this.lat],
-      zoom: 9
+      zoom: 1
     });
+    this.markers = this.mapboxService.getMarkers();
 
-    this.map.on('load', () => {
-
-      this.map.addSource('customMarker', {
-        type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: []
-        }
-      });
-
-      this.markers = this.mapboxService.getMarkers();
-      const data = {
-        type: 'FeatureCollection',
-        features: this.markers
-      };
-      this.map.getSource('customMarker').setData(data);
-
-      this.map.addLayer({
-        id: 'customMarketid',
-        source: 'customMarker',
-        type: 'symbol',
-        layout: {
-          'text-field': '{message}',
-          'text-size': 24,
-          'text-transform': 'uppercase',
-          'icon-image': 'marker-15',
-          'text-offset': [0, 1.5]
-        },
-        paint: {
-          'text-color': '#f16624',
-          'text-halo-color': '#fff',
-          'text-halo-width': 2
-        }
-      });
-    });
+    // const LngLat = [[77.1025, 28.7041], [78.4867, 17.3850], [77.5946, 12.9716]];
+    // LngLat.forEach(lnglat => {
+    //   this.createMarker(lnglat[0], lnglat[1]);
+    // });
+    this.createMarker();
   }
 
+  createMarker() {
+    this.markers.forEach(marker => {
+
+      new mapboxgl.Marker({color: 'red'}).setLngLat(marker.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup().setHTML(marker.properties.description))
+        .addTo(this.map);
+    });
+  }
 
 }

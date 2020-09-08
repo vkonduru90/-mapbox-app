@@ -13,22 +13,22 @@ export class MapboxService {
 
   getMarkers() {
     const geoJson = [{
-      'type': 'Feature',
       'geometry': {
-        'type': 'Point',
         'coordinates': ['101.686100', '3.139000']
       },
       'properties': {
-        'message': 'kuala lumpur'
+        'message': 'kuala lumpur',
+        'description':
+          '<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>',
       }
     }, {
-      'type': 'Feature',
       'geometry': {
-        'type': 'Point',
         'coordinates': ['77.1025', '28.7041']
       },
       'properties': {
-        'message': 'Delhiiiiiii'
+        'message': 'Delhiiiiiii',
+        'description':
+          '<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>',
       }
     }];
     return geoJson;
